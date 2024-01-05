@@ -1,0 +1,32 @@
+---
+- name: Creaste jenkins home directory
+  become: true
+  become_user: root 
+  ansible.builtin.file:
+    path: /opt/jenkins
+    state: directory
+    owner: '1000'
+    group: '1000'
+    recurse: true
+
+- name: Install python3-docker package
+  become: true
+  become_user: root 
+  package: name={{ item }} state=present
+  with_items:
+   - python3-docker
+
+- name: Create jenkins container
+  become: true
+  become_user: root 
+  docker_container:
+    container_default_behavior: no_defaults
+    name: jenkins
+    image: jenkins/jenkins:jdk17
+    state: present
+    ports:
+      - '0.0.0.0:8080:8080'
+      - '0.0.0.0:50000:50000'
+    restart: true
+    volumes:
+      - /opt/jenkins:/var/jenkins_home

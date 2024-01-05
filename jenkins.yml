@@ -1,0 +1,9 @@
+---
+- name: Install jenkins
+  hosts: all
+  remote_user: ubuntu
+
+  roles:
+    - system
+    - docker
+    - jenkins
