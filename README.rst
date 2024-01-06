@@ -98,7 +98,7 @@ jenkins role
           - /opt/jenkins:/var/jenkins_home
 
 
-`ansible.builtin.file module <https://docs.ansible.com/ansible/latest/collections/ansible/builtin/file_module.html>`_ создаёт ``/opt/jenkins`` директорию. Директория будет использоваться для хранения всей конфигураций jenkins и jenkins jobs. Мы её будем подключать в jenkins контейнер.
+`ansible.builtin.file module <https://docs.ansible.com/ansible/latest/collections/ansible/builtin/file_module.html>`_ создаёт ``/opt/jenkins`` директорию. Директория будет использоваться для хранения всей конфигурации jenkins и jenkins jobs. Мы её будем подключать в jenkins контейнер.
 
 Package устанавливает python3-docker deb пакет - `docker_container module <https://docs.ansible.com/ansible/latest/collections/community/docker/docker_container_module.html>`_ использует python3-docker для запуска jenkins контейнера.
 
