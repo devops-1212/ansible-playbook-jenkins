@@ -1,5 +1,3 @@
-:topic: Плейбук Ansible для установки Jenkins с docker
-
 Плейбук Ansible для установки Jenkins с docker
 ==============================================
 
@@ -32,7 +30,7 @@ system role
 
 Здесь мы используем `ansible apt module <https://docs.ansible.com/ansible/latest/collections/ansible/builtin/apt_module.html>`_ с параметрами: 
 
-* ``update_cache: true`` - указывет ansible выполнить ``apt-get update``.
+* ``update_cache: true`` - указывает ansible выполнить ``apt-get update``.
 * ``upgrade: "yes"`` - запускается ``aptitude safe-upgrade``.
 
 docker role
