@@ -22,11 +22,12 @@ system role
 .. code-block:: yaml
 
     - name: Update and upgrade apt packages
-    become: true
-    become_user: root
-    apt:
-        update_cache: true
+      become: true
+      become_user: root
+      apt:
         upgrade: "yes"
+        update_cache: true
+
 
 Здесь мы используем `ansible apt module <https://docs.ansible.com/ansible/latest/collections/ansible/builtin/apt_module.html>`_ с параметрами: 
 
@@ -41,16 +42,17 @@ docker role
 .. code-block:: yaml
 
     - name: Install docker package
-    become: true
-    become_user: root 
-    package: name={{ item }} state=present
-    with_items:
-    - docker.io
-
+      become: true
+      become_user: root 
+      package: name={{ item }} state=present
+      with_items:
+       - docker.io
+    
     - name: Start Docker Service
-    become: true
-    become_user: root
-    service: name=docker state=started enabled=yes
+      become: true
+      become_user: root
+      service: name=docker state=started enabled=yes
+
 
 `Package module <https://docs.ansible.com/ansible/latest/collections/ansible/builtin/package_module.html>`_ устанавливает docker.io пакет.
 
@@ -64,36 +66,37 @@ jenkins role
 .. code-block:: yaml
 
     - name: Create jenkins home directory
-    become: true
-    become_user: root 
-    ansible.builtin.file:
+      become: true
+      become_user: root 
+      ansible.builtin.file:
         path: /opt/jenkins
         state: directory
         owner: '1000'
         group: '1000'
         recurse: true
-
+    
     - name: Install python3-docker package
-    become: true
-    become_user: root 
-    package: name={{ item }} state=present
-    with_items:
-    - python3-docker
-
+      become: true
+      become_user: root 
+      package: name={{ item }} state=present
+      with_items:
+       - python3-docker
+    
     - name: Create jenkins container
-    become: true
-    become_user: root 
-    docker_container:
+      become: true
+      become_user: root 
+      docker_container:
         container_default_behavior: no_defaults
         name: jenkins
         image: jenkins/jenkins:jdk17
         state: started
         ports:
-        - '0.0.0.0:8080:8080'
-        - '0.0.0.0:50000:50000'
+          - '0.0.0.0:8080:8080'
+          - '0.0.0.0:50000:50000'
         restart_policy: always
         volumes:
-        - /opt/jenkins:/var/jenkins_home
+          - /opt/jenkins:/var/jenkins_home
+
 
 `ansible.builtin.file module <https://docs.ansible.com/ansible/latest/collections/ansible/builtin/file_module.html>`_ создаёт ``/opt/jenkins`` директорию. Директория будет использоваться для хранения всей конфигураций jenkins и jenkins jobs. Мы её будем подключать в jenkins контейнер.
 
