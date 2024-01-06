@@ -1,4 +1,3 @@
----
 - name: Update and upgrade apt packages
   become: true
   become_user: root

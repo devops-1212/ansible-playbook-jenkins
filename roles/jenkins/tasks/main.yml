@@ -1,5 +1,4 @@
----
-- name: Creaste jenkins home directory
+- name: Create jenkins home directory
   become: true
   become_user: root 
   ansible.builtin.file:
@@ -23,10 +22,10 @@
     container_default_behavior: no_defaults
     name: jenkins
     image: jenkins/jenkins:jdk17
-    state: present
+    state: started
     ports:
       - '0.0.0.0:8080:8080'
       - '0.0.0.0:50000:50000'
-    restart: true
+    restart_policy: always
     volumes:
       - /opt/jenkins:/var/jenkins_home
