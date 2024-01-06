@@ -117,10 +117,10 @@ Playbook
 .. code-block:: yaml
 
     - name: Install jenkins
-    hosts: all
-    remote_user: ubuntu
+      hosts: all
+      remote_user: ubuntu
 
-    roles:
+      roles:
         - system
         - docker
         - jenkins
